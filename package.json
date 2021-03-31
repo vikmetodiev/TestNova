@@ -1,15 +1,56 @@
 {
-  "name": "learn-starter",
-  "version": "0.1.0",
-  "private": true,
+  "name": "Novarto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "devbuild": "rimraf ../ui/ &&  cp src/dev.env.js src/env.js && next dev",
+    "prodbuild": "rimraf ../ui/ && cp src/prod.env.js src/env.js && next build"
   },
+  "keywords": [
+    "React",
+    "React-Router",
+    "MobX",
+    "Webpack",
+    "ES6",
+    "ES7"
+  ],
+  "author": "Novarto",
+  "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.13.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-brands-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@material/react-checkbox": "^0.15.0",
+    "@zeit/next-css": "^1.0.1",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "font-awesome": "^4.7.0",
+    "fslightbox-react": "^1.6.2",
+    "mobx": "^6.1.7",
+    "mobx-react": "^7.1.0",
+    "mobx-react-lite": "^3.2.0",
     "next": "^10.0.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react": "^17.0.1",
+    "react-bootstrap4-form-validation": "^1.0.10",
+    "react-dom": "^17.0.1",
+    "react-google-recaptcha": "^2.1.0",
+    "react-hamburgers": "^1.0.0",
+    "react-player": "^2.9.0",
+    "react-router-last-location": "^2.0.1",
+    "react-scroll-parallax": "^2.3.5",
+    "react-scrollspy": "^3.4.3",
+    "reactstrap": "^8.9.0",
+    "sass": "^1.32.8",
+    "universal-cookie": "^4.0.4",
+    "validator": "^13.5.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.13.5"
   }
 }

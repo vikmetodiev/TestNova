@@ -1,209 +1,343 @@
-import Head from 'next/head'
+import React, { Component } from "react";
+import { inject, observer } from "mobx-react";
+import { Col, Container, Row } from "reactstrap";
+import PageMainHeader from "../public/PageMainHeader";
+import { useRootStore } from "../provider";
+import Link from "next/link";
+const Home = () => {
+  const store = useRootStore();
 
-export default function Home() {
+  const renderHomeLinks = (link) => {
+    const links = link.split(", ");
+    return links.map((item, i) => {
+      if (item.includes("ins__")) {
+        return;
+      } else {
+        let found = store.findById(item);
+        let findSolution = store.pages.find((item) => {
+          return item.id === "SOLUTIONS";
+        });
+        let foundItem = findSolution.children.find((itm) => {
+          return itm.id === found.split(" ").join("-").split("/").join("-");
+        });
+        return (
+          <Col
+            key={i}
+            md={{ size: 3 }}
+            sm={{ size: 12 }}
+            className="col pt-2 px-4"
+          >
+            
+            <Link
+              href={{
+                pathname: "/ServicesBySolution/[slug]",
+                query: {
+                  slug: found.split(" ").join("-").split("/").join("-"),
+                },
+              }}
+            >
+              <a>
+              <div className="home-info">
+                <div className="text-center mr-3">
+                  {foundItem ? (
+                    <img
+                      src={store.API_PATH + foundItem.icon}
+                      alt={foundItem.title}
+                      title={foundItem.title}
+                      width="65"
+                    />
+                  ) : (
+                    item
+                  )}
+                </div>
+                <div className="pl-0 d-flex align-items-start justify-content-center flex-column">
+                  <div className="h4 pt-2">
+                    {foundItem ? foundItem.title : item}
+                  </div>
+                  <div className="pb-4 show-mobile">
+                    {foundItem ? foundItem.SUBTITLE : item}
+                  </div>
+                </div>
+              </div>
+              <div className="pb-4  dark-grey-text mt-3 hide-mobile">
+                {foundItem ? foundItem.SUBTITLE : item}
+              </div>
+              <div className="light-blue-text read-more ">
+                {store.translations.read_more}
+              </div>
+              </a>
+            </Link>
+          </Col>
+        );
+      }
+    });
+  };
+
+  const renderClientsLinks = (link) => {
+    const links = link.split(", ");
+    return links.map((item, i) => {
+      if (item.includes("ins__")) {
+        return;
+      } else {
+        let found = store.findById(item);
+        let findClients = store.pages.find((item) => {
+          return item.id === "CLIENTS";
+        });
+
+        let foundItem = findClients.children.find((itm) => {
+          return itm.id === found.split(" ").join("-");
+        });
+        if (foundItem) {
+          return (
+            <Link
+              key={i}
+              href={{
+                pathname: "/Clients/[slug]",
+                query: {
+                  slug: found.split(" ").join("-").split("/").join("-"),
+                },
+              }}
+            >
+              <a className="d-inline-block mx-2 my-3">
+                <span className="client-image d-inline-block">
+                  <img
+                    src={store.API_PATH + foundItem.logo}
+                    alt={foundItem.title}
+                    title={foundItem.title}
+                    width={100}
+                  />
+                </span>
+              </a>
+            </Link>
+          );
+        }
+      }
+    });
+  };
+
+  const renderPartnersLinks = (link) => {
+    const links = link.split(", ");
+    return links.map((item, i) => {
+      if (item.includes("ins__")) {
+        return;
+      } else {
+        let found = store.findById(item);
+        let findPartners = store.pages.find((item) => {
+          return item.id === "PARTNERS";
+        });
+
+        let foundItem = findPartners.children.find((itm) => {
+          return itm.id === found.split(" ").join("-");
+        });
+        if (foundItem) {
+          return (
+            <Link
+              key={i}
+              href={{
+                pathname: "/Partners/[slug]",
+                query: {
+                  slug: found.split(" ").join("-").split("/").join("-"),
+                },
+              }}
+            >
+              <a className="d-inline-block mx-3 my-3">
+              <span className="partner-image d-inline-block">
+                <img
+                  src={store.API_PATH + foundItem.logo}
+                  alt={foundItem.name}
+                  title={foundItem.name}
+                  height={60}
+                />
+              </span>
+              </a>
+            </Link>
+          );
+        }
+      }
+    });
+  };
+
+  const renderPlatformsLinks = (link) => {
+    const links = link.split(", ");
+    return links.map((item, i) => {
+      if (item.includes("ins__")) {
+        return;
+      } else {
+        let found = store.findById(item);
+        let findPlatforms = store.pages.find((item) => {
+          return item.id === "PLATFORMS";
+        });
+        let foundItem = findPlatforms.children.find((itm) => {
+          found = found.split("/").join("-");
+          return itm.id === found.split(" ").join("-");
+        });
+        if (foundItem) {
+          return (
+            <Link
+              key={i}
+              href={{
+                pathname: "/ServicesByPlatform/[slug]",
+                query: {
+                  slug: found.split(" ").join("-").split("/").join("-"),
+                },
+              }}
+            >
+              <a className="d-inline-block mx-4 py-3">
+              <span className="partner-image d-inline-block mt-3">
+                <img
+                  src={store.API_PATH + foundItem.Platform_icon}
+                  alt={foundItem.name}
+                  title={foundItem.name}
+                  height={34}
+                />
+              </span>
+              </a>
+            </Link>
+          );
+        }
+      }
+    });
+  };
+
+  let homepage = store.pages.find((item) => {
+    return item.id === "HOMEPAGE";
+  });
+  if (!homepage) {
+    return null;
+  }
+  homepage = homepage.children[0];
+
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="page home overflow-hidden">
+      {/*<ListGroup>*/}
+      {/*	*/}
+      {/*	{this.store.pages.map((page) => {*/}
+      {/*		return <ListGroupItem key={page.id}>{page.id}</ListGroupItem>*/}
+      {/*	})}*/}
+      {/*</ListGroup>*/}
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <PageMainHeader
+        stars={
+          <div>
+            <span className="star-item star-1"></span>
+            <span className="star-item star-2"></span>
+            <span className="star-item star-3"></span>
+            <span className="star-item star-4"></span>
+            <span className="star-item star-5"></span>
+            <span className="star-item star-6"></span>
+            <span className="star-item star-7"></span>
+            <span className="star-item star-8"></span>
+            <span className="star-item star-9"></span>
+            <div className="stars-animated">
+              <span className="star-animated"></span>
+              <span className="star-animated"></span>
+              <span className="star-animated"></span>
+            </div>
+          </div>
+        }
+        bgcolor={"dark-blue-bg"}
+        header={homepage.title}
+        title={homepage.subtitle}
+        imageleft={
+          <div>
+            <img
+              src="/images/illustrations/homepage-left-blank-v3.png"
+              alt="image"
+              className="image image-left"
+            />
+            <div id="galaxy">
+              <div id="earth"></div>
+              <div className="orbit">
+                <div className="pos">
+                  <div className="planet"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        imageright={
+          <div>
+            <img
+              src="/images/illustrations/homepage-right-blank-v2.png"
+              alt="image"
+              className="image image-right"
+            />
+            <div className="animation-container">
+              <div className="rocket-container">
+                <div className="rocket">
+                  <div className="booster-flames"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      />
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
+      <Container className="main-solutions mt-5">
+        <Row>
+          <Col className="mb-3">
+            <h2 className="h3 text-center mb-4 dark-blue-text">
+              {homepage.rel_title}
+            </h2>
+          </Col>
+        </Row>
+        <Row className="mb-5 justify-content-center">
+          {renderHomeLinks(homepage.relation)}
+        </Row>
+        <Row>
+          <Col md={9} className="mx-auto mb-2">
+            <hr className="" />
+          </Col>
+          <Col md={12} className="mb-2 text-center">
+            <h2 className="h3 my-4 dark-blue-text">
+              {store.translations.clients}
+            </h2>
+            <p className="h4 mid-grey-text font-weight-light">
+              {store.translations.homepage_clintssubtitle}
             </p>
-          </a>
-        </div>
-      </main>
+          </Col>
+          <Col md={12} className="text-center">
+            <div className="clients-widget d-inline-block pr-2">
+              {renderClientsLinks(homepage.clients_relations)}
+            </div>
+          </Col>
+          <Col md={9} className="mx-auto mb-2">
+            <hr className="" />
+          </Col>
+          <Col md={12} className="mb-2 text-center">
+            <h2 className="h3 my-4 dark-blue-text">
+              {store.translations.partner}
+            </h2>
+            <p className="h4 mid-grey-text font-weight-light">
+              {store.translations.homepage_partnersubtitle}
+            </p>
+          </Col>
+          <Col md={12} className="text-center">
+            <div className="partner-widget d-inline-block">
+              {renderPartnersLinks(homepage.partners_relations)}
+            </div>
+          </Col>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
+          <Col md={9} className="mx-auto mb-2">
+            <hr className="" />
+          </Col>
+          <Col md={12} className="mb-2 text-center">
+            <h2 className="h3 my-4 dark-blue-text">
+              {store.translations.tab_platforms}
+            </h2>
+            <p className="h4 mid-grey-text font-weight-light">
+              {store.translations.homepage_platformsubtitle}
+            </p>
+          </Col>
+          <Col md={12} className="text-center">
+            <div className="clients-widget d-inline-block">
+              {renderPlatformsLinks(homepage.platforms_relations)}
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
-  )
-}
+  );
+};
+
+export default observer(Home);

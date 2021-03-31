@@ -1,0 +1,52 @@
+.nav-blue-tabs {
+  &.nav-tabs {
+    border: none;
+
+    .nav-item {
+      flex-grow: 1;
+      margin-right: 8px;
+    }
+    .nav-link {
+      @extend .btn-tab;
+      background-color: white;
+      color: $blue_bg;
+      border-color: $blue_bg;
+      text-align: center;
+
+      &:hover,
+      &.active {
+        background-color: $blue_bg;
+        border-color: white;
+        color: white;
+      }
+    }
+  }
+
+}
+
+.tabs-sticky{
+    .active-content-tab{
+
+        a{
+            color: $blue_bg !important;
+        }
+    }
+}
+
+.content-sticky{
+    .active-content-tab{
+        position: relative;
+
+        &:before {
+            position: absolute;
+            top: 20px;
+            left: -25px;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid #0490C4;
+            width: 0;
+            height: 0;
+            content: ' ';
+        }
+    }
+}

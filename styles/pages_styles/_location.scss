@@ -1,0 +1,140 @@
+.flex-center {
+  @include flex();
+  align-items: center;
+  justify-content: center;
+}
+
+.location-table {
+  & > * {
+    text-align: center;
+  }
+  .row {
+    & > [class*="col-"] {
+      border-top: 1px solid $border-grey;
+      padding: 35px 25px;
+      flex-direction: column;
+      @extend .flex-center;
+
+      &:nth-child(even) {
+        background-color: rgba(39, 73, 126, .05);
+
+      }
+
+      a {
+        color: #0178a2;
+
+        &:hover {
+          color: #0178a2;
+        }
+      }
+    }
+    &:first-of-type {
+      [class*="col-"] {
+        border-top: 0;
+      }
+    }
+    & > div {
+      &:first-child {
+        text-transform: uppercase;
+        color: $mid-grey;
+      }
+    }
+    &:nth-of-type(4) {
+      [class*="col-"] + [class*="col-"] {
+        font-size: 1.6em;
+        font-weight: lighter;
+      }
+    }
+    &:last-of-type {
+      [class*="col-"] + [class*="col-"] {
+        word-break: break-word;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+  }
+  .table-title {
+    font-size: 1.25em;
+  }
+  .number {
+    font-size: 1.55em;
+    font-weight: lighter;
+  }
+
+  .location-icons{
+    width: 50px;
+  }
+}
+
+.location-tabs-mobile {
+  margin: -25px 20px 0 20px;
+
+  .left-items, .tab-items {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .left-items {
+    color: $border-grey;
+    text-transform: uppercase;
+    font-size: 0.8em;
+  }
+  .location-left-item {
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+
+    .location-icons {
+      width: 50%;
+    }
+  }
+  .tab-item,
+  .location-left-item {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #A8ABAB;
+    color: $mid-grey;
+
+    &:first-child {
+      height: 140px;
+    }
+  }
+  .tab-item {
+    padding: 0 20px;
+    background-color: rgba(39, 73, 126, .05);
+    .h2 {
+      padding: 0;
+    }
+    &:nth-child(3) {
+      font-size: 1.6em;
+      font-weight: lighter;
+    }
+    &:nth-child(2),
+    &:nth-child(3) {
+      justify-content: center;
+    }
+  }
+  .nav-tabs {
+    flex-wrap: nowrap;
+    border: none;
+    margin: 0 -15px 15px -15px;
+    .nav-link {
+      border: 1px solid $blue_bg;
+      background: white;
+      color: $blue_bg;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-right: 8px;
+      &.active {
+        background-color: $blue_bg;
+        color: white;
+      }
+    }
+  }
+
+  .nav-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

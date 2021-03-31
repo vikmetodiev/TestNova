@@ -1,0 +1,57 @@
+.btn-primary {
+  border: 1px solid $blue_bg;
+  background-color: $blue_bg;
+  color: white;
+  &:hover {
+    border: 1px solid $blue_bg;
+    background-color: white;
+    color: $blue_bg;
+    text-decoration: none;
+  }
+}
+
+.wrapper .btn-tab,
+.btn-tab {
+  @extend .btn-primary;
+  @include rounded(6px);
+  padding: 0 15px;
+  line-height: 32px;
+  cursor: pointer;
+  &:focus {
+    box-shadow: none;
+    @extend .btn-primary;
+  }
+  &.selected {
+    background-color: white;
+    color: $blue_bg;
+  }
+  &.inactive {
+    cursor: not-allowed;
+    border: 1px solid $inactive-color;
+    background-color: white;
+    color: $inactive-color;
+  }
+  &:not(:disabled):not(.disabled):active {
+    @extend .btn-primary;
+  }
+  &:not(:disabled):not(.disabled):active:focus {
+    box-shadow: none;
+  }
+  &.dark-blue-bg {
+    background-color: $primary_color;
+    border-color: $primary_color;
+    &:focus, &:active, &:hover {
+      background-color: $blue_bg !important;
+      border-color: $blue_bg !important;
+    }
+  }
+}
+
+.wrapper .btn-big,
+.btn-big {
+  text-transform: uppercase;
+  padding: 9px 15px;
+  @extend .btn-primary;
+  @include box-shadow(3px, 3px, 7px, 0px, rgba(204,204,204,1), false);
+  @include rounded(4px);
+}

@@ -1,0 +1,182 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	//overflow: hidden;
+	//height: 100%;
+}
+
+body {
+	height: 100%;
+	overflow: auto;
+	padding: 0;
+	margin: 0;
+	//overflow-y: scroll;
+	min-width: 320px;
+}
+
+.wrapper {
+	min-height: 100vh;
+	display: block;
+	position: relative;
+	padding-bottom: 180px;
+
+	a {
+		text-decoration: none;
+		cursor: pointer;
+		color: $link_color;
+		&:hover {
+			color: $link_color;
+		}
+		&.active {
+			color: $link_color;
+		}
+		&.link {
+			color: $link_color;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+	}
+
+	a:focus,
+	button:focus {
+		outline:0 !important;
+	}
+
+	strong {
+		font-weight: bold;
+	}
+
+	.btn-link {
+		color: $link_color;
+		padding: 0;
+	}
+}
+
+ul {
+	&.blue-bullet-list {
+		li {
+			list-style: none;
+			margin-left: 20px;
+			position: relative;
+			margin-bottom: 30px;
+			line-height: 1.5em;
+			&:before {
+				content: "";
+				width: 5px;
+				height: 5px;
+				background-color: $blue_bg;
+				display: inline-block;
+				vertical-align: middle;
+				border-radius: 50%;
+				position: absolute;
+				left: -15px;
+				top: 9px;
+			}
+			a {
+				color: $link_color;
+			}
+		}
+	}
+}
+
+.paragraphs {
+	p {
+	margin-bottom: 1.3em;
+	line-height: 1.5em;
+		a {
+			color: $link_color;
+		}
+	}
+
+	strong {
+	font-weight: bold;
+	}
+
+	ul {
+		padding-bottom: 10px;
+		@extend .blue-bullet-list;
+		li {
+			margin-bottom: 15px;
+		}
+	}
+
+	ol {
+		list-style: decimal;
+		list-style-position: inside;
+		padding-left: 18px;
+		li {
+			margin-bottom: 15px;
+			list-style: number;
+			line-height: 1.5em;
+		}
+	}
+
+	a {
+		color: $link_color;
+	}
+
+	h2, h3, h4, h5 {
+		margin-bottom: 15px;
+	}
+}
+
+.breadcrumbs {
+	text-transform: uppercase;
+	font-weight: bold;
+	a {
+		color: $link_color;
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+	span {
+		color: $inactive_color;
+	}
+}
+
+hr, .hr {
+	border-color: $hr-grey;
+	&.blue-line {border-color: $blue_bg;}
+	&.inner-space {
+		&:first-child {
+			margin-bottom: 2em;
+		}
+		&:last-child {
+			margin-top: 2em;
+		}
+	}
+}
+
+.light-grey-bg {
+	hr {
+		border-color: $tab-border;
+	}
+}
+
+.gallery-image {
+	cursor: pointer;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+//Animation
+
+.tab-pane {
+	&.active {
+		animation: fade-and-slide-in 600ms ease-in-out;
+	}
+}
+
+@keyframes fade-and-slide-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

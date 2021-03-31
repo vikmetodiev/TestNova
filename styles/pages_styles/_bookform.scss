@@ -1,0 +1,343 @@
+.bookPage {
+  .page-main-section {
+    .image {
+      &.image-left {
+        top: 91px;
+        left: 50px;
+      }
+      &.image-right {
+        top: auto;
+        bottom: 30px;
+      }
+    }
+  }
+
+  .form-row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .form-control {
+    background-image: none !important;
+    border-radius: 0;
+    border: 1px solid $mid-grey;
+    font-family: 'Roboto', Helvetica, sans-serif;
+    font-weight: 300;
+    color: $text_color;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border-color: $blue_bg;
+      color: $text_color;
+    }
+    &.is-invalid {
+      box-shadow: none;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    .invalid-feedback {
+      font-weight: 200;
+    }
+  }
+
+  .was-validated .custom-control-input:valid ~ .custom-control-label,
+  .custom-control-input.is-valid ~ .custom-control-label{
+    color:#4d4d4d;
+  }
+
+  .was-validated textarea.form-control:valid,
+  textarea.form-control.is-valid{
+    border:1px solid #4d4d4d;
+  }
+
+  .was-validated .form-control:valid,
+  .form-control.is-valid{
+    border-color:#4d4d4d;
+  }
+
+  .custom-radio-holder {
+    display: flex;
+    margin: 0 auto;
+    padding: 0 2.1em;
+
+    .custom-control {
+      display: flex;
+      transition: transform .2s; /* Animation */
+
+      &.custom-radio {
+        flex: 1 0 0px;
+      }
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+
+  .custom-control-label {
+    border: 1px solid $mid-grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2em;
+    width: 100%;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      display: none;
+    }
+    img {
+      display: block;
+      margin-bottom: 1em;
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label {
+    border-color: $blue_bg;
+    color: $blue_bg !important;
+  }
+
+  .star-item {
+    background-color: white;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    position: absolute;
+    @include box-shadow(0, 0, 6px, 1px, rgba(255, 255, 255, 1), false);
+
+    &.star-1 {
+      width: 3px;
+      height: 3px;
+      top: 84px;
+      left: 0;
+      animation: blinking-first 7s infinite;
+    }
+
+    &.star-2 {
+      top: 52px;
+      left: 180px;
+      animation: blinking-first 3s infinite;
+    }
+
+    &.star-3 {
+      width: 3px;
+      height: 3px;
+      top: 247px;
+      left: 235px;
+      animation: blinking-second 6s infinite;
+    }
+
+    &.star-4 {
+      width: 3px;
+      height: 3px;
+      top: 30px;
+      right: 177px;
+      animation: blinking-first 7s infinite;
+    }
+
+    &.star-5 {
+      width: 3px;
+      height: 3px;
+      top: 145px;
+      right: 27px;
+      animation: blinking-second 5s infinite;
+    }
+
+    &.star-6 {
+      width: 2px;
+      height: 2px;
+      right: 221px;
+      bottom: 22px;
+      animation: blinking-first 8s infinite;
+    }
+  }
+}
+
+.booknowWidget {
+  margin-bottom: -111px;
+  .title {
+    font-size: 36px;
+    margin-bottom: 6px;
+  }
+  .btn-tab {
+    font-size: 0.45em;
+  }
+  .row > .my-5 {
+    margin-top: 1.5em !important;
+    margin-bottom: 1.5em !important;
+  }
+  .image-right {
+    width: 300px;
+  }
+}
+
+.modal.fade {
+  .modal-dialog {
+    &.successModal, &.errorModal {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+.modal-dialog {
+  &.successModal, &.errorModal {
+    .btn-link {
+      color: $link_color;
+    }
+    .modal-content {
+      border-radius: 1.2em;
+      border: none;
+      padding: 3rem 0 0.5em 0;
+      .modal-header {
+        border: none;
+        text-align: center;
+        display: block;
+        .close {
+          position: absolute;
+          top: 12px;
+          right: 20px;
+        }
+        .modal-picture {
+          width: 120px;
+          height: 120px;
+          background-size: contain;
+          display: block;
+          margin: 0 auto;
+        }
+        .modal-title {
+          font-size: 24px;
+          .text-center {
+            margin: 1.5rem 0 0 0;
+          }
+        }
+      }
+      .modal-body {
+        text-align: center;
+        color: $text_color;
+        padding-top: 0;
+      }
+      .modal-footer {
+        border: none;
+        justify-content: flex-start;
+      }
+    }
+  }
+  &.errorModal {
+    .modal-content {
+      background: #ffffff url("https://api.novarto.com/api/images/error-rocket.png") no-repeat 0 0;
+    }
+    .modal-header {
+      .modal-picture {
+        background: url("https://api.novarto.com/api/images/error.svg") no-repeat 0 0;
+      }
+      .modal-title {
+        color: $red_color;
+      }
+    }
+  }
+  &.successModal {
+    .modal-content {
+      background: #ffffff url("https://api.novarto.com/api/images/success-rocket.png") no-repeat 0 0;
+    }
+    .modal-header {
+      .modal-picture {
+        background: url("https://api.novarto.com/api/images/success.svg") no-repeat 0 0;
+      }
+      .modal-title {
+        color: $link_color;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .booknowWidget {
+    margin-bottom: -48px;
+    .title {
+      font-size: 30px;
+    }
+    .btn-tab {
+      font-size: 0.6em;
+      display: block;
+      margin: 2em auto 0 auto;
+      padding: 0.4em 1em;
+    }
+  }
+  .bookPage {
+    .btn-send {
+      margin: 0 auto;
+      display: block;
+      padding: 0.2em;
+    }
+  }
+  .modal.fade {
+    .modal-dialog {
+      &.successModal, &.errorModal {
+        transform: none;
+        top: 16%;
+        left: unset;
+        .modal-footer {
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+
+.input-animation {
+  margin-top: 1.7em;
+  position: relative;
+  label {
+    position: absolute;
+    top: -28px;
+    left: 5px;
+    width: 100%;
+    text-align: left;
+    pointer-events: none;
+    span {
+      color: #666666;
+      font-family: 'Roboto', Helvetica, sans-serif;
+      font-weight: 300;
+      font-size: 0.8em;
+      position: relative;
+      display: block;
+      padding: 0.6em;
+      width: 100%;
+      pointer-events: none;
+      //-webkit-transition: -webkit-transform 0.3s;
+      //transition: transform 0.3s;
+    }
+  }
+  .invalid-feedback {
+    margin-left: 13px;
+  }
+
+  //.form-control.is-invalid:focus ~ label span,
+  //.form-control:not(:placeholder-shown) ~ label span,
+  //.form-control:focus ~ label span,
+  //.form-control:-webkit-autofill ~ label span {
+  //  -webkit-transform: translate3d(0, -90%, 0);
+  //  transform: translate3d(0, -90%, 0);
+  //  font-size: 0.8em;
+  //}
+}
+
+.light-blue-bg {
+  .input-animation {
+    label {
+      left: -6px;
+      span {
+        color: #ffffff;
+      }
+    }
+    .invalid-feedback {
+      margin-left: 0;
+    }
+  }
+}
